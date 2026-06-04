@@ -1,0 +1,5 @@
+﻿column,type,description
+order_id,INT,Unique order
+customer_id,INT,FK to customers
+order_date,DATE,Date of purchase
+amount,DECIMAL,Order value
