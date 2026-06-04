@@ -1,0 +1,5 @@
+﻿column,type,description
+customer_id,INT,Unique customer
+name,VARCHAR,Customer name
+region,VARCHAR,"North, South, East, West"
+signup_date,DATE,When customer joined
