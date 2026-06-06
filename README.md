@@ -119,6 +119,20 @@ FROM gold.dim_products
 GROUP BY category
 ORDER BY avg_cost DESC;
 
+SELECT*
+FROM Sales.Products
+
+SELECT
+	Product,
+	ProductID,
+  AVG(Price) AS Average_Price
+FROM Sales.Products
+GROUP BY Product, ProductID
+ORDER BY Average_Price DESC;
+
+<img width="1173" height="836" alt="image" src="https://github.com/user-attachments/assets/de56d6b9-29b8-49c0-9b40-6f353266b943" />
+
+
 -- What is the total revenue generated for each category?
 SELECT
     p.category,
@@ -145,6 +159,20 @@ GROUP BY
     c.last_name
 ORDER BY total_revenue DESC;
 
+SELECT 
+Sales.Orders.Sales,
+Sales.Products.Category,
+Sales.Orders.Quantity,
+Sales.Products.Price,
+SUM(Sales) TotalRevenue
+FROM Sales.Orders
+LEFT JOIN Sales.Products
+ON Sales.Orders.ProductID = Sales.Products.ProductID
+GROUP BY Sales.Products.Category, Sales.Orders.Sales, Sales.Orders.Quantity, Sales.Products.Price
+ORDER BY TotalRevenue DESC;
+<img width="1186" height="844" alt="image" src="https://github.com/user-attachments/assets/59a49d34-6793-4bdd-8633-18c4407210de" />
+
+
 -- What is the distribution of sold items across countries?
 SELECT
     c.country,
@@ -154,6 +182,18 @@ LEFT JOIN gold.dim_customers c
     ON c.customer_key = f.customer_key
 GROUP BY c.country
 ORDER BY total_sold_items DESC;
+
+SELECT
+	c.Country,
+	o.Sales,
+	SUM(o.Quantity) AS TotalItemsSold
+FROM
+	Sales.Orders o
+	LEFT JOIN Sales.Customers c ON o.CustomerID = c.CustomerID
+GROUP BY
+	c.Country, o.Sales
+ORDER BY TotalItemsSold DESC;
+<img width="1148" height="834" alt="image" src="https://github.com/user-attachments/assets/540e6e5d-02d3-4232-9501-2e92bbfa42ea" />
 
 
 # 📌 4. Insights Report (Completed)
